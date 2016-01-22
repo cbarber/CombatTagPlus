@@ -52,6 +52,11 @@
 
   <repositories>
     <repository>
+      <id>confuser-repo</id>
+      <url>http://ci.frostcast.net/plugin/repository/everything</url>
+      <snapshots><enabled>true</enabled></snapshots>
+    </repository>
+    <repository>
       <id>metrics-repo</id>
       <url>http://repo.mcstats.org/content/repositories/public</url>
     </repository>
@@ -62,10 +67,6 @@
     <repository>
       <id>spigot-repo</id>
       <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
-    </repository>
-    <repository>
-      <id>confuser-repo</id>
-      <url>http://ci.frostcast.net/plugin/repository/everything</url>
     </repository>
   </repositories>
 
@@ -88,6 +89,7 @@
       <version>1.2.2-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
+    <!--
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusCompat-v1_7_R3</artifactId>
@@ -100,6 +102,7 @@
       <version>1.2.2-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
+    -->
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusCompat-v1_8_R1</artifactId>
@@ -124,6 +127,7 @@
       <version>1.2.2-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
+    <!--
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusFactions-v1_6</artifactId>
@@ -142,18 +146,21 @@
       <version>1.2.2-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
+    -->
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusFactions-v2_7</artifactId>
       <version>1.2.2-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
+    <!--
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusWG-v5</artifactId>
       <version>1.2.2-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
+    -->
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusWG-v6</artifactId>
@@ -164,7 +171,8 @@
       <groupId>me.confuser</groupId>
       <artifactId>BarAPI</artifactId>
       <version>3.3</version>
-      <scope>provided</scope>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/BarAPI.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>com.connorlinfoot</groupId>
