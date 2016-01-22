@@ -249,7 +249,7 @@ public final class PlayerListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void disableTeleportation(PlayerTeleportEvent event) {
         // Do nothing if teleportation is allowed in combat
         if (!plugin.getSettings().disableTeleportation()) return;
