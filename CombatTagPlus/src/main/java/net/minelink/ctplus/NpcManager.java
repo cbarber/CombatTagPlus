@@ -2,6 +2,8 @@ package net.minelink.ctplus;
 
 import net.minelink.ctplus.event.NpcDespawnEvent;
 import net.minelink.ctplus.event.NpcDespawnReason;
+import net.minelink.ctplus.event.NpcSpawnEvent;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -63,6 +65,9 @@ public final class NpcManager {
             l.getWorld().playEffect(l, Effect.MOBSPAWNER_FLAMES, 0, 64);
             l.getWorld().playSound(l, Sound.EXPLODE, 0.9F, 0);
         }
+        
+        NpcSpawnEvent event = new NpcSpawnEvent(npc);
+        Bukkit.getPluginManager().callEvent(event);
 
         return npc;
     }
