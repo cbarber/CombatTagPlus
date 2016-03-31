@@ -194,6 +194,10 @@ public final class Settings {
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 
+    public boolean resetTagOnPearl() {
+        return plugin.getConfig().getBoolean("reset-tag-on-pearl");
+    }
+
     public boolean playEffect() {
         return plugin.getConfig().getBoolean("play-effect");
     }
@@ -294,8 +298,12 @@ public final class Settings {
         return plugin.getConfig().getInt("npc-despawn-time", 60);
     }
 
-    public int getNpcDespawnTicks() {
-        return getNpcDespawnTime() * 20;
+    public int getNpcDespawnMillis() {
+        return getNpcDespawnTime() * 1000;
+    }
+
+    public boolean resetDespawnTimeOnHit() {
+        return plugin.getConfig().getBoolean("reset-despawn-time-on-hit");
     }
 
     public boolean generateRandomName() {

@@ -4,6 +4,7 @@ import net.minelink.ctplus.event.NpcDespawnEvent;
 import net.minelink.ctplus.event.NpcDespawnReason;
 import net.minelink.ctplus.event.NpcSpawnEvent;
 
+import net.minelink.ctplus.task.NpcDespawnTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -14,12 +15,15 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public final class NpcManager {
 
     private final CombatTagPlus plugin;
 
     private final Map<UUID, Npc> spawnedNpcs = new HashMap<>();
+
+    private final Map<Npc, NpcDespawnTask> despawnTasks = new HashMap<>();
 
     NpcManager(CombatTagPlus plugin) {
         this.plugin = plugin;
@@ -63,11 +67,18 @@ public final class NpcManager {
         if (plugin.getSettings().playEffect()) {
             Location l = entity.getLocation();
             l.getWorld().playEffect(l, Effect.MOBSPAWNER_FLAMES, 0, 64);
-            l.getWorld().playSound(l, Sound.EXPLODE, 0.9F, 0);
+            // NOTE: Do not directly access the values in the sound enum, as that can change across versions\
+            l.getWorld().playSound(l, EXPLODE_SOUND, 0.9F, 0);
         }
         
         NpcSpawnEvent event = new NpcSpawnEvent(npc);
         Bukkit.getPluginManager().callEvent(event);
+
+        // Create and start the NPCs despawn task
+        long despawnTime = System.currentTimeMillis() + plugin.getSettings().getNpcDespawnMillis();
+        NpcDespawnTask despawnTask = new NpcDespawnTask(plugin, npc, despawnTime);
+        despawnTask.start();
+        despawnTasks.put(npc, despawnTask);
 
         return npc;
     }
@@ -85,6 +96,13 @@ public final class NpcManager {
         NpcDespawnEvent event = new NpcDespawnEvent(npc, reason);
         Bukkit.getPluginManager().callEvent(event);
 
+        // Cancel the NPCs despawn task if they have one
+        if (hasDespawnTask(npc)) {
+            NpcDespawnTask despawnTask = getDespawnTask(npc);
+            despawnTask.stop();
+            despawnTasks.remove(npc);
+        }
+
         // Remove the NPC entity from the world
         plugin.getNpcPlayerHelper().despawn(npc.getEntity());
         spawnedNpcs.remove(npc.getIdentity().getId());
@@ -96,6 +114,30 @@ public final class NpcManager {
 
     public boolean npcExists(UUID playerId) {
         return spawnedNpcs.containsKey(playerId);
+    }
+
+    public NpcDespawnTask getDespawnTask(Npc npc) {
+        return despawnTasks.get(npc);
+    }
+
+    public boolean hasDespawnTask(Npc npc) {
+        return despawnTasks.containsKey(npc);
+    }
+
+    // Use reflection
+    private static final Sound EXPLODE_SOUND;
+    static {
+        Sound sound;
+        try {
+            sound = Sound.valueOf("ENTITY_GENERIC_EXPLODE"); // 1.9 name
+        } catch (IllegalArgumentException e) {
+            try {
+                sound = Sound.valueOf("EXPLODE"); // 1.8 name
+            } catch (IllegalArgumentException e2) {
+                throw new AssertionError("Unable to find explosion sound");
+            }
+        }
+        EXPLODE_SOUND = sound;
     }
 
 }
