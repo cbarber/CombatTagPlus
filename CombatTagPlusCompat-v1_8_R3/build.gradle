@@ -1,0 +1,10 @@
+group = 'net.minelink'
+description = ''
+dependencies {
+    compile(group: 'org.bukkit', name: 'craftbukkit', version:'1.8.4-R0.1') {
+       /* This dependency was originally in the Maven provided scope, but the project was not of type war.
+       This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
+       Please review and delete this closure when resolved. */
+    }
+  compile project(':CombatTagPlusParent:CombatTagPlusCompat-API')
+}
