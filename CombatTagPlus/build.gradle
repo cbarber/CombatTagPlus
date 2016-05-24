@@ -9,6 +9,7 @@ dependencies {
   compile project(':CombatTagPlusParent:CombatTagPlusCompat-v1_8_R2')
   compile project(':CombatTagPlusParent:CombatTagPlusCompat-v1_8_R3')
   compile project(':CombatTagPlusParent:CombatTagPlusCompat-v1_9_R1')
+  compile project(':CombatTagPlusParent:CombatTagPlusCompat-v1_9_R2')
   compile project(':CombatTagPlusParent:CombatTagPlusHook')
   compile project(':CombatTagPlusParent:CombatTagPlusWG-v6')
     compile(group: 'org.bukkit', name: 'bukkit', version:'1.9-R0.1-SNAPSHOT') {
@@ -46,6 +47,7 @@ shadowJar {
     include(project(':CombatTagPlusParent:CombatTagPlusCompat-v1_8_R2'))
     include(project(':CombatTagPlusParent:CombatTagPlusCompat-v1_8_R3'))
     include(project(':CombatTagPlusParent:CombatTagPlusCompat-v1_9_R1'))
+    include(project(':CombatTagPlusParent:CombatTagPlusCompat-v1_9_R2'))
     include(project(':CombatTagPlusParent:CombatTagPlusHook'))
     include(project(':CombatTagPlusParent:CombatTagPlusWG-v6'))
   }
