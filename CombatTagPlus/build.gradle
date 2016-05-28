@@ -42,6 +42,7 @@ dependencies {
 
 shadowJar {
   dependencies {
+    include('org.mcstats:metrics-lite')
     include(project(':CombatTagPlusParent:CombatTagPlusCompat-API'))
     include(project(':CombatTagPlusParent:CombatTagPlusCompat-v1_8_R1'))
     include(project(':CombatTagPlusParent:CombatTagPlusCompat-v1_8_R2'))
