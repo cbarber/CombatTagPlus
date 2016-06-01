@@ -40,16 +40,16 @@ dependencies {
     compile(group: 'me.confuser', name: 'BarAPI', version:'3.4-SNAPSHOT')
 }
 
-shadowJar {
-  dependencies {
-    include('org.mcstats:metrics-lite')
-    include(project(':CombatTagPlusParent:CombatTagPlusCompat-API'))
-    include(project(':CombatTagPlusParent:CombatTagPlusCompat-v1_8_R1'))
-    include(project(':CombatTagPlusParent:CombatTagPlusCompat-v1_8_R2'))
-    include(project(':CombatTagPlusParent:CombatTagPlusCompat-v1_8_R3'))
-    include(project(':CombatTagPlusParent:CombatTagPlusCompat-v1_9_R1'))
-    include(project(':CombatTagPlusParent:CombatTagPlusCompat-v1_9_R2'))
-    include(project(':CombatTagPlusParent:CombatTagPlusHook'))
-    include(project(':CombatTagPlusParent:CombatTagPlusWG-v6'))
-  }
+configurations {
+  // exclusions from shadowJar
+  runtime.exclude module: 'bukkit'
+  runtime.exclude module: 'craftbukkit'
+  runtime.exclude module: 'junit'
+  runtime.exclude module: 'worldguard'
+  runtime.exclude module: 'worldedit'
+  runtime.exclude module: 'Towny'
+  runtime.exclude module: 'PlayerHeads'
+  runtime.exclude module: 'ActionBarAPI'
+  runtime.exclude module: 'BossBarAPI'
+  runtime.exclude module: 'BarAPI'
 }
