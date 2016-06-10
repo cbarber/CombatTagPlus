@@ -3,7 +3,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 group = 'net.minelink'
 description = ''
 dependencies {
-  compile group: 'org.mcstats', name: 'metrics-lite', version:'1.2-SNAPSHOT'
+  compile group: 'org.mcstats.bukkit', name: 'metrics-lite', version:'R8-SNAPSHOT'
   compile project(':CombatTagPlusParent:CombatTagPlusCompat-API')
   compile project(':CombatTagPlusParent:CombatTagPlusCompat-v1_8_R1')
   compile project(':CombatTagPlusParent:CombatTagPlusCompat-v1_8_R2')
