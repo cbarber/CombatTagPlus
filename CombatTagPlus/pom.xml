@@ -5,15 +5,15 @@
   <parent>
     <artifactId>CombatTagPlusParent</artifactId>
     <groupId>net.minelink</groupId>
-    <version>1.2.4-SNAPSHOT</version>
+    <version>1.2.4</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>CombatTagPlus</artifactId>
 
   <properties>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <build>
@@ -28,7 +28,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>2.2</version>
+        <version>2.4.3</version>
         <configuration>
           <createDependencyReducedPom>false</createDependencyReducedPom>
           <relocations>
@@ -86,97 +86,103 @@
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusCompat-API</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>1.2.4</version>
       <scope>compile</scope>
     </dependency>
     <!--
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusCompat-v1_7_R3</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>1.2.4</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusCompat-v1_7_R4</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>1.2.4</version>
       <scope>compile</scope>
     </dependency>
     -->
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusCompat-v1_8_R1</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>1.2.4</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusCompat-v1_8_R2</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>1.2.4</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusCompat-v1_8_R3</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>1.2.4</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusCompat-v1_9_R1</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>1.2.4</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusCompat-v1_9_R2</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>1.2.4</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.minelink</groupId>
+      <artifactId>CombatTagPlusCompat-v1_10_R1</artifactId>
+      <version>1.2.4</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusHook</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>1.2.4</version>
       <scope>compile</scope>
     </dependency>
     <!--
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusFactions-v1_6</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>1.2.4</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusFactions-v1_8</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>1.2.4</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusFactions-v2_6</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>1.2.4</version>
       <scope>compile</scope>
     </dependency>
     -->
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusFactions-v2_7</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>1.2.4</version>
       <scope>compile</scope>
     </dependency>
     <!--
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusWG-v5</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>1.2.4</version>
       <scope>compile</scope>
     </dependency>
     -->
     <dependency>
       <groupId>net.minelink</groupId>
       <artifactId>CombatTagPlusWG-v6</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>1.2.4</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
