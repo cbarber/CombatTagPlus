@@ -4,6 +4,7 @@ import net.minelink.ctplus.compat.api.NpcPlayerHelper;
 import net.minelink.ctplus.event.PlayerCombatTagEvent;
 import net.minelink.ctplus.event.PlayerCombatUntagEvent;
 
+import net.minelink.ctplus.event.UntagReason;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -101,11 +102,11 @@ public final class TagManager {
         }
     }
 
-    public boolean untag(UUID playerId) {
+    public boolean untag(UUID playerId, UntagReason reason) {
         Tag tag = tags.remove(playerId);
 
         if(tag != null) {
-            PlayerCombatUntagEvent event = new PlayerCombatUntagEvent(playerId);
+            PlayerCombatUntagEvent event = new PlayerCombatUntagEvent(playerId, reason);
             Bukkit.getPluginManager().callEvent(event);
         }
         

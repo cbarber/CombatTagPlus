@@ -3,6 +3,7 @@ package net.minelink.ctplus.listener;
 import net.minelink.ctplus.CombatTagPlus;
 import net.minelink.ctplus.Tag;
 import net.minelink.ctplus.event.PlayerCombatTagEvent;
+import net.minelink.ctplus.event.UntagReason;
 import net.minelink.ctplus.task.TagUpdateTask;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
@@ -263,7 +264,7 @@ public final class PlayerListener implements Listener {
             case UNKNOWN:
                 // Optionally untag on PLUGIN or UNKNOWN
                 if (plugin.getSettings().untagOnPluginTeleport()) {
-                    plugin.getTagManager().untag(player.getUniqueId());
+                    plugin.getTagManager().untag(player.getUniqueId(), UntagReason.UNKNOWN);
                 }
                 return;
         }

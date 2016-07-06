@@ -4,6 +4,7 @@ import net.minelink.ctplus.CombatTagPlus;
 import net.minelink.ctplus.Npc;
 import net.minelink.ctplus.event.NpcDespawnEvent;
 import net.minelink.ctplus.event.NpcDespawnReason;
+import net.minelink.ctplus.event.UntagReason;
 import net.minelink.ctplus.task.SafeLogoutTask;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -83,7 +84,7 @@ public final class NpcListener implements Listener {
         if (npc == null) return;
 
         // NPC died, remove player's combat tag
-        plugin.getTagManager().untag(id);
+        plugin.getTagManager().untag(id, UntagReason.DEATH);
 
         // Despawn NPC on the next tick
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
@@ -122,7 +123,7 @@ public final class NpcListener implements Listener {
         if (!plugin.getNpcPlayerHelper().isNpc(player)) return;
 
         // NPC died, remove player's combat tag
-        plugin.getTagManager().untag(player.getUniqueId());
+        plugin.getTagManager().untag(player.getUniqueId(), UntagReason.DEATH);
 
         // Save NPC player data on next tick
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {

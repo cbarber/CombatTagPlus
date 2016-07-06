@@ -5,6 +5,7 @@ import net.minelink.ctplus.CombatTagPlus;
 import net.minelink.ctplus.Tag;
 import net.minelink.ctplus.TagManager;
 import net.minelink.ctplus.event.PlayerCombatTagEvent;
+import net.minelink.ctplus.event.UntagReason;
 import net.minelink.ctplus.task.SafeLogoutTask;
 import net.minelink.ctplus.task.TagUpdateTask;
 import org.bukkit.Bukkit;
@@ -199,7 +200,7 @@ public final class TagListener implements Listener {
 
         // Remove combat tag from player if not a NPC
         if (!plugin.getNpcPlayerHelper().isNpc(player)) {
-            plugin.getTagManager().untag(player.getUniqueId());
+            plugin.getTagManager().untag(player.getUniqueId(), UntagReason.DEATH);
         }
     }
 
@@ -210,7 +211,7 @@ public final class TagListener implements Listener {
 
         // Remove the players tag
         Player player = event.getPlayer();
-        plugin.getTagManager().untag(player.getUniqueId());
+        plugin.getTagManager().untag(player.getUniqueId(), UntagReason.KICK);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

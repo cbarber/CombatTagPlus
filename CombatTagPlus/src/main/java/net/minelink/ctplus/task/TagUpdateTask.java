@@ -2,6 +2,7 @@ package net.minelink.ctplus.task;
 
 import net.minelink.ctplus.CombatTagPlus;
 import net.minelink.ctplus.Tag;
+import net.minelink.ctplus.event.UntagReason;
 import net.minelink.ctplus.util.BarUtils;
 import net.minelink.ctplus.util.DurationUtils;
 import org.bukkit.Bukkit;
@@ -52,7 +53,7 @@ public final class TagUpdateTask extends BukkitRunnable {
                 player.sendMessage(plugin.getSettings().getUntagMessage());
             }
 
-            plugin.getTagManager().untag(player.getUniqueId());
+            plugin.getTagManager().untag(player.getUniqueId(), UntagReason.EXPIRATION);
 
             cancel();
             return;
