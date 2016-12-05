@@ -1,11 +1,15 @@
 package net.minelink.ctplus;
 
+import java.io.IOException;
+import java.util.UUID;
+
 import net.minelink.ctplus.compat.api.NpcNameGeneratorFactory;
 import net.minelink.ctplus.compat.api.NpcPlayerHelper;
 import net.minelink.ctplus.hook.Hook;
 import net.minelink.ctplus.hook.HookManager;
 import net.minelink.ctplus.hook.TownyHook;
 import net.minelink.ctplus.listener.ForceFieldListener;
+import net.minelink.ctplus.listener.InstakillListener;
 import net.minelink.ctplus.listener.NpcListener;
 import net.minelink.ctplus.listener.PlayerHeadsListener;
 import net.minelink.ctplus.listener.PlayerListener;
@@ -16,6 +20,7 @@ import net.minelink.ctplus.task.TagUpdateTask;
 import net.minelink.ctplus.util.BarUtils;
 import net.minelink.ctplus.util.DurationUtils;
 import net.minelink.ctplus.util.ReflectionUtils;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -23,9 +28,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.MetricsLite;
-
-import java.io.IOException;
-import java.util.UUID;
 
 import static org.bukkit.ChatColor.*;
 
@@ -69,12 +71,6 @@ public final class CombatTagPlus extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Disable plugin if version compatibility check fails
-        if (!checkVersionCompatibility()) {
-            Bukkit.getPluginManager().disablePlugin(this);
-            return;
-        }
-
         // Load settings
         saveDefaultConfig();
 
@@ -84,10 +80,18 @@ public final class CombatTagPlus extends JavaPlugin {
             getLogger().info("Configuration file has been updated.");
         }
 
+        // Disable plugin if version compatibility check fails
+        if (!checkVersionCompatibility()) {
+            Bukkit.getPluginManager().disablePlugin(this);
+            return;
+        }
+
         // Initialize plugin state
         hookManager = new HookManager(this);
-        npcManager = new NpcManager(this);
         tagManager = new TagManager(this);
+        if (npcPlayerHelper != null) {
+            npcManager = new NpcManager(this);
+        }
 
         NpcNameGeneratorFactory.setNameGenerator(new NpcNameGeneratorImpl(this));
 
@@ -104,7 +108,12 @@ public final class CombatTagPlus extends JavaPlugin {
 
         // Register event listeners
         Bukkit.getPluginManager().registerEvents(new ForceFieldListener(this), this);
-        Bukkit.getPluginManager().registerEvents(new NpcListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new InstakillListener(this), this);
+
+        if (getNpcManager() != null) {
+            Bukkit.getPluginManager().registerEvents(new NpcListener(this), this);
+        }
+
         Bukkit.getPluginManager().registerEvents(new PlayerListener(this), this);
         Bukkit.getPluginManager().registerEvents(new TagListener(this), this);
 
@@ -143,6 +152,10 @@ public final class CombatTagPlus extends JavaPlugin {
 
         // Warn about incompatibility and return false indicating failure
         if (helperClass == null) {
+            // Always compatible if NPCs aren't being used
+            if (settings.instantlyKill() && !settings.alwaysSpawn()) {
+                return true;
+            }
             getLogger().severe("**VERSION ERROR**");
             getLogger().severe("Server API version detected: " + ReflectionUtils.API_VERSION);
             getLogger().severe("This version of CombatTagPlus is not compatible with your CraftBukkit.");
@@ -207,8 +220,7 @@ public final class CombatTagPlus extends JavaPlugin {
 
         // Determine if Towny is loaded
         if (Bukkit.getPluginManager().isPluginEnabled("Towny")) {
-            Hook hook = new TownyHook();
-            getHookManager().addHook(hook);
+            getHookManager().addHook(new TownyHook());
         }
     }
 
@@ -247,19 +259,23 @@ public final class CombatTagPlus extends JavaPlugin {
         if (cmd.getName().equals("ctplusreload")) {
             reloadConfig();
             getSettings().load();
-            sender.sendMessage(GREEN + getName() + " config reloaded.");
+            if (sender instanceof Player) {
+                sender.sendMessage(GREEN + getName() + " config reloaded.");
+            }
+
+            getLogger().info("Config reloaded by " + sender.getName());
         } else if (cmd.getName().equals("combattagplus")) {
             if (!(sender instanceof Player)) return false;
 
             UUID uniqueId = ((Player) sender).getUniqueId();
             Tag tag = getTagManager().getTag(uniqueId);
             if (tag == null || tag.isExpired() || !getTagManager().isTagged(uniqueId)) {
-                sender.sendMessage(GREEN + "You are not in combat.");
+                sender.sendMessage(getSettings().getCommandUntagMessage());
                 return true;
             }
 
             String duration = DurationUtils.format(tag.getTagDuration());
-            sender.sendMessage(RED + duration + GRAY + " remaining on your combat timer.");
+            sender.sendMessage(getSettings().getCommandTagMessage().replace("{time}", duration));
         } else if (cmd.getName().equals("ctpluslogout")) {
             if (!(sender instanceof Player)) return false;
 

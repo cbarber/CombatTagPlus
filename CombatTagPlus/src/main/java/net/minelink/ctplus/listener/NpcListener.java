@@ -1,11 +1,17 @@
 package net.minelink.ctplus.listener;
 
+import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
 import net.minelink.ctplus.CombatTagPlus;
 import net.minelink.ctplus.Npc;
 import net.minelink.ctplus.event.NpcDespawnEvent;
 import net.minelink.ctplus.event.NpcDespawnReason;
+import net.minelink.ctplus.event.CombatLogEvent;
 import net.minelink.ctplus.event.UntagReason;
-import net.minelink.ctplus.task.SafeLogoutTask;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,12 +21,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-
-import java.util.UUID;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 public final class NpcListener implements Listener {
 
@@ -30,34 +30,11 @@ public final class NpcListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void spawnNpc(PlayerQuitEvent event) {
-        // Do nothing if player is not combat tagged and NPCs only spawn if tagged
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onCombatLog(CombatLogEvent event) {
         Player player = event.getPlayer();
 
-        // Do nothing if player is dead
-        if (player.isDead()) return;
-
-        boolean isTagged = plugin.getTagManager().isTagged(player.getUniqueId());
-        if (!isTagged && !plugin.getSettings().alwaysSpawn()) return;
-
-        // Do nothing if player is not within enabled world
-        if (plugin.getSettings().getDisabledWorlds().contains(player.getWorld().getName())) return;
-
-        // Do nothing if a player logs off in combat in a WorldGuard protected region
-        if (!plugin.getHookManager().isPvpEnabledAt(player.getLocation())) return;
-
-        // Do nothing if player has permission
-        if (player.hasPermission("ctplus.bypass.tag")) return;
-
-        // Do nothing if player has safely logged out
-        if (SafeLogoutTask.isFinished(player)) return;
-
-        // Kill player if configuration states so
-        if (isTagged && plugin.getSettings().instantlyKill()) {
-            player.setHealth(0);
-            return;
-        }
+        if (plugin.getSettings().instantlyKill()) return; // Let instakill handle it
 
         // Spawn a new NPC
         plugin.getNpcManager().spawn(player);
@@ -93,6 +70,15 @@ public final class NpcListener implements Listener {
                 plugin.getNpcManager().despawn(npc, NpcDespawnReason.DEATH);
             }
         });
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
+    public void onNPCDamage(EntityDamageByEntityEvent event) {
+        if (!(event.getDamager() instanceof Player)) return; // Check if the attacker is a player
+        if (!(event.getEntity() instanceof Player) || !plugin.getNpcPlayerHelper().isNpc((Player) event.getEntity())) return; // Check if the defender is an entity
+        Player attacker = (Player) event.getDamager();
+        Player npc = (Player) event.getEntity();
+        UUID npcPlayerId = plugin.getNpcPlayerHelper().getIdentity(npc).getId();
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
