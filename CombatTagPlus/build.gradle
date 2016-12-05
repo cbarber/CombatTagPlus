@@ -1,19 +1,40 @@
+buildscript {
+  repositories { 
+    jcenter() 
+  }
+  dependencies {
+    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+  }
+}
+
 apply plugin: 'com.github.johnrengelman.shadow'
 
-group = 'net.minelink'
 description = ''
 dependencies {
-  compile group: 'org.mcstats.bukkit', name: 'metrics-lite', version:'R8-SNAPSHOT'
-  compile project(':CombatTagPlusParent:CombatTagPlusCompat-API')
-  compile project(':CombatTagPlusParent:CombatTagPlusCompat-v1_8_R1')
-  compile project(':CombatTagPlusParent:CombatTagPlusCompat-v1_8_R2')
-  compile project(':CombatTagPlusParent:CombatTagPlusCompat-v1_8_R3')
-  compile project(':CombatTagPlusParent:CombatTagPlusCompat-v1_9_R1')
-  compile project(':CombatTagPlusParent:CombatTagPlusCompat-v1_9_R2')
-  compile project(':CombatTagPlusParent:CombatTagPlusCompat-v1_10_R1')
-  compile project(':CombatTagPlusParent:CombatTagPlusHook')
-  compile project(':CombatTagPlusParent:CombatTagPlusWG-v6')
-    compile(group: 'org.bukkit', name: 'bukkit', version:'1.9.4-R0.1-SNAPSHOT') {
+    compile group: 'org.mcstats.bukkit', name: 'metrics-lite', version:'R8-SNAPSHOT'
+  compile project(':CombatTagPlusCompat-API')
+  compile project(':CombatTagPlusCompat-v1_7_R3')
+  compile project(':CombatTagPlusCompat-v1_7_R4')
+  compile project(':CombatTagPlusCompat-v1_8_R1')
+  compile project(':CombatTagPlusCompat-v1_8_R2')
+  compile project(':CombatTagPlusCompat-v1_8_R3')
+  compile project(':CombatTagPlusCompat-v1_9_R1')
+  compile project(':CombatTagPlusCompat-v1_9_R2')
+  compile project(':CombatTagPlusCompat-v1_10_R1')
+  compile project(':CombatTagPlusHook')
+  compile project(':CombatTagPlusFactions-v1_6')
+  compile project(':CombatTagPlusFactions-v1_8')
+  compile project(':CombatTagPlusFactions-v2_6')
+  compile project(':CombatTagPlusFactions-v2_7')
+  compile project(':CombatTagPlusWG-v5')
+  compile project(':CombatTagPlusWG-v6')
+    compile group: 'com.google.code.findbugs', name: 'jsr305', version:'2.0.1'
+    compile(group: 'org.bukkit', name: 'bukkit', version:'1.10-R0.1-SNAPSHOT') {
+       /* This dependency was originally in the Maven provided scope, but the project was not of type war.
+       This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
+       Please review and delete this closure when resolved. */
+    }
+    compile(group: 'me.confuser', name: 'BarAPI', version:'3.4-SNAPSHOT') {
        /* This dependency was originally in the Maven provided scope, but the project was not of type war.
        This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
        Please review and delete this closure when resolved. */
@@ -38,7 +59,6 @@ dependencies {
        This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
        Please review and delete this closure when resolved. */
     }
-    compile(group: 'me.confuser', name: 'BarAPI', version:'3.4-SNAPSHOT')
 }
 
 configurations {

@@ -1,4 +1,4 @@
-group = 'net.minelink'
+
 description = ''
 dependencies {
     compile(group: 'org.bukkit', name: 'craftbukkit', version:'1.10.2-R0.1-SNAPSHOT') {
@@ -6,5 +6,5 @@ dependencies {
        This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
        Please review and delete this closure when resolved. */
     }
-  compile project(':CombatTagPlusParent:CombatTagPlusCompat-API')
+  compile project(':CombatTagPlusCompat-API')
 }
