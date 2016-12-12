@@ -18,7 +18,6 @@ import net.minelink.ctplus.task.ForceFieldTask;
 import net.minelink.ctplus.task.SafeLogoutTask;
 import net.minelink.ctplus.task.TagUpdateTask;
 import net.minelink.ctplus.util.BarUtils;
-import net.minelink.ctplus.util.DurationUtils;
 import net.minelink.ctplus.util.ReflectionUtils;
 
 import org.bukkit.Bukkit;
@@ -274,7 +273,7 @@ public final class CombatTagPlus extends JavaPlugin {
                 return true;
             }
 
-            String duration = DurationUtils.format(tag.getTagDuration());
+            String duration = settings.formatDuration(tag.getTagDuration());
             sender.sendMessage(getSettings().getCommandTagMessage().replace("{time}", duration));
         } else if (cmd.getName().equals("ctpluslogout")) {
             if (!(sender instanceof Player)) return false;
@@ -285,6 +284,26 @@ public final class CombatTagPlus extends JavaPlugin {
 
             // Attempt to start a new logout task
             SafeLogoutTask.run(this, player);
+        } else if (cmd.getName().equals("ctplusuntag")) {
+            if (!(sender instanceof Player)) return false;
+
+            if (args.length < 1) {
+                sender.sendMessage(RED + " Please specify a player to untag");
+                return true;
+            }
+
+            @SuppressWarnings("deprecation")
+            Player player = getServer().getPlayer(args[0]);
+            if (player == null || getNpcPlayerHelper().isNpc(player)) {
+                sender.sendMessage(RED + args[0] + " is not currently online!");
+                return true;
+            }
+            UUID uniqueId = player.getUniqueId();
+            if (getTagManager().untag(uniqueId)) {
+                sender.sendMessage(GREEN + "Successfully untagged " + player.getName() + ".");
+            } else {
+                sender.sendMessage(GREEN + player.getName() + " is already untagged.");
+            }
         }
 
         return true;
