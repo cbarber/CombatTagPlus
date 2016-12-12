@@ -1,0 +1,26 @@
+allprojects  {
+  apply plugin: 'maven'
+
+  group = 'net.minelink'
+version = '1.3.0-SNAPSHOT'
+}
+
+subprojects {
+  apply plugin: 'java'
+  sourceCompatibility = 1.7
+  targetCompatibility = 1.7
+
+  
+  repositories {
+    mavenLocal()
+    
+    maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url "https://hub.spigotmc.org/nexus/content/groups/public/" }
+    maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots" }
+    maven { url "http://repo.minelink.net/content/repositories/thirdparty" }
+    maven { url "https://repo.techcable.net/content/groups/public/" }
+    maven { url "http://maven.sk89q.com/repo" }
+    maven { url "http://repo.mcstats.org/content/repositories/public" }
+    maven { url "http://ci.frostcast.net/plugin/repository/everything" }
+  }
+}

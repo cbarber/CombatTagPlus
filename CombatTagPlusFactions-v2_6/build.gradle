@@ -1,0 +1,20 @@
+
+description = ''
+dependencies {
+    compile(group: 'org.bukkit', name: 'craftbukkit', version:'1.8.3-R0.1') {
+       /* This dependency was originally in the Maven provided scope, but the project was not of type war.
+       This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
+       Please review and delete this closure when resolved. */
+    }
+  compile project(':CombatTagPlusHook')
+    compile(group: 'com.massivecraft', name: 'Factions', version:'2.6.0') {
+       /* This dependency was originally in the Maven provided scope, but the project was not of type war.
+       This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
+       Please review and delete this closure when resolved. */
+    }
+    compile(group: 'com.massivecraft', name: 'MassiveCore', version:'7.4.0') {
+       /* This dependency was originally in the Maven provided scope, but the project was not of type war.
+       This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
+       Please review and delete this closure when resolved. */
+    }
+}
