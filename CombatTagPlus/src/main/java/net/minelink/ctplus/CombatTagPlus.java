@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import net.minelink.ctplus.compat.api.NpcNameGeneratorFactory;
 import net.minelink.ctplus.compat.api.NpcPlayerHelper;
+import net.minelink.ctplus.event.UntagReason;
 import net.minelink.ctplus.hook.Hook;
 import net.minelink.ctplus.hook.HookManager;
 import net.minelink.ctplus.hook.TownyHook;
@@ -299,7 +300,7 @@ public final class CombatTagPlus extends JavaPlugin {
                 return true;
             }
             UUID uniqueId = player.getUniqueId();
-            if (getTagManager().untag(uniqueId)) {
+            if (getTagManager().untag(uniqueId, UntagReason.COMMAND)) {
                 sender.sendMessage(GREEN + "Successfully untagged " + player.getName() + ".");
             } else {
                 sender.sendMessage(GREEN + player.getName() + " is already untagged.");
