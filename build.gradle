@@ -20,6 +20,7 @@ subprojects {
     maven { url "http://repo.minelink.net/content/repositories/thirdparty" }
     maven { url "https://repo.techcable.net/content/groups/public/" }
     maven { url "http://maven.sk89q.com/repo" }
+    maven { url "http://maven.sk89q.com/artifactory/repo/" }
     maven { url "http://repo.mcstats.org/content/repositories/public" }
     maven { url "http://ci.frostcast.net/plugin/repository/everything" }
   }

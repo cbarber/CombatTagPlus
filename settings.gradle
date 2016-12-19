@@ -10,11 +10,11 @@ include ':CombatTagPlusCompat-v1_9_R2'
 include ':CombatTagPlusCompat-v1_10_R1'
 include ':CombatTagPlusCompat-v1_11_R0.1'
 include ':CombatTagPlusHook'
-include ':CombatTagPlusFactions-v1_6'
-include ':CombatTagPlusFactions-v1_8'
+// include ':CombatTagPlusFactions-v1_6'
+// include ':CombatTagPlusFactions-v1_8'
 include ':CombatTagPlusFactions-v2_6'
 include ':CombatTagPlusFactions-v2_7'
-include ':CombatTagPlusWG-v5'
+// include ':CombatTagPlusWG-v5'
 include ':CombatTagPlusWG-v6'
 include ':CombatTagPlus'
 
@@ -29,10 +29,10 @@ project(':CombatTagPlusCompat-v1_9_R2').projectDir = "$rootDir/CombatTagPlusComp
 project(':CombatTagPlusCompat-v1_10_R1').projectDir = "$rootDir/CombatTagPlusCompat-v1_10_R1" as File
 project(':CombatTagPlusCompat-v1_11_R0.1').projectDir = "$rootDir/CombatTagPlusCompat-v1_11_R0.1" as File
 project(':CombatTagPlusHook').projectDir = "$rootDir/CombatTagPlusHook" as File
-project(':CombatTagPlusFactions-v1_6').projectDir = "$rootDir/CombatTagPlusFactions-v1_6" as File
-project(':CombatTagPlusFactions-v1_8').projectDir = "$rootDir/CombatTagPlusFactions-v1_8" as File
+// project(':CombatTagPlusFactions-v1_6').projectDir = "$rootDir/CombatTagPlusFactions-v1_6" as File
+// project(':CombatTagPlusFactions-v1_8').projectDir = "$rootDir/CombatTagPlusFactions-v1_8" as File
 project(':CombatTagPlusFactions-v2_6').projectDir = "$rootDir/CombatTagPlusFactions-v2_6" as File
 project(':CombatTagPlusFactions-v2_7').projectDir = "$rootDir/CombatTagPlusFactions-v2_7" as File
-project(':CombatTagPlusWG-v5').projectDir = "$rootDir/CombatTagPlusWG-v5" as File
+// project(':CombatTagPlusWG-v5').projectDir = "$rootDir/CombatTagPlusWG-v5" as File
 project(':CombatTagPlusWG-v6').projectDir = "$rootDir/CombatTagPlusWG-v6" as File
 project(':CombatTagPlus').projectDir = "$rootDir/CombatTagPlus" as File

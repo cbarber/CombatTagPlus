@@ -22,11 +22,11 @@ dependencies {
   compile project(':CombatTagPlusCompat-v1_9_R2')
   compile project(':CombatTagPlusCompat-v1_10_R1')
   compile project(':CombatTagPlusHook')
-  compile project(':CombatTagPlusFactions-v1_6')
-  compile project(':CombatTagPlusFactions-v1_8')
+  // compile project(':CombatTagPlusFactions-v1_6')
+  // compile project(':CombatTagPlusFactions-v1_8')
   compile project(':CombatTagPlusFactions-v2_6')
   compile project(':CombatTagPlusFactions-v2_7')
-  compile project(':CombatTagPlusWG-v5')
+  // compile project(':CombatTagPlusWG-v5')
   compile project(':CombatTagPlusWG-v6')
     compile group: 'com.google.code.findbugs', name: 'jsr305', version:'2.0.1'
     compile(group: 'org.bukkit', name: 'bukkit', version:'1.10-R0.1-SNAPSHOT') {
@@ -63,14 +63,20 @@ dependencies {
 
 configurations {
   // exclusions from shadowJar
-  runtime.exclude module: 'bukkit'
   runtime.exclude module: 'craftbukkit'
   runtime.exclude module: 'junit'
   runtime.exclude module: 'worldguard'
   runtime.exclude module: 'worldedit'
   runtime.exclude module: 'Towny'
-  runtime.exclude module: 'PlayerHeads'
-  runtime.exclude module: 'ActionBarAPI'
-  runtime.exclude module: 'BossBarAPI'
-  runtime.exclude module: 'BarAPI'
+}
+
+shadowJar {
+  dependencies {
+    exclude(dependency('org.bukkit:bukkit:'))
+    exclude(dependency('me.confuser:BarAPI:'))
+    exclude(dependency('com.connorlinfoot:ActionBarAPI:'))
+    exclude(dependency('org.inventivetalent:BossBarAPI:'))
+    exclude(dependency('org.shininet.bukkit:PlayerHeads:'))
+    exclude(dependency('com.palmergames:Towny:'))
+  }
 }
