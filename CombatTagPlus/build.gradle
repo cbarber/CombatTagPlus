@@ -21,6 +21,7 @@ dependencies {
   compile project(':CombatTagPlusCompat-v1_9_R1')
   compile project(':CombatTagPlusCompat-v1_9_R2')
   compile project(':CombatTagPlusCompat-v1_10_R1')
+  compile project(':CombatTagPlusCompat-v1_11_R1')
   compile project(':CombatTagPlusHook')
   // compile project(':CombatTagPlusFactions-v1_6')
   // compile project(':CombatTagPlusFactions-v1_8')
