@@ -22,6 +22,7 @@ dependencies {
   compile project(':CombatTagPlusCompat-v1_9_R2')
   compile project(':CombatTagPlusCompat-v1_10_R1')
   compile project(':CombatTagPlusCompat-v1_11_R1')
+  compile project(':CombatTagPlusCompat-v1_12_R1')
   compile project(':CombatTagPlusHook')
   // compile project(':CombatTagPlusFactions-v1_6')
   // compile project(':CombatTagPlusFactions-v1_8')
@@ -30,7 +31,7 @@ dependencies {
   // compile project(':CombatTagPlusWG-v5')
   compile project(':CombatTagPlusWG-v6')
     compile group: 'com.google.code.findbugs', name: 'jsr305', version:'2.0.1'
-    compile(group: 'org.bukkit', name: 'bukkit', version:'1.10-R0.1-SNAPSHOT') {
+    compile(group: 'org.bukkit', name: 'bukkit', version:'1.12-R0.1-SNAPSHOT') {
        /* This dependency was originally in the Maven provided scope, but the project was not of type war.
        This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
        Please review and delete this closure when resolved. */
@@ -69,6 +70,7 @@ configurations {
   runtime.exclude module: 'worldguard'
   runtime.exclude module: 'worldedit'
   runtime.exclude module: 'Towny'
+  runtime.exclude module: 'spigot'
 }
 
 shadowJar {
@@ -79,5 +81,6 @@ shadowJar {
     exclude(dependency('org.inventivetalent:BossBarAPI:'))
     exclude(dependency('org.shininet.bukkit:PlayerHeads:'))
     exclude(dependency('com.palmergames:Towny:'))
+    exclude(dependency('org.spigotmc:spigot:'))
   }
 }

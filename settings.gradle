@@ -9,6 +9,7 @@ include ':CombatTagPlusCompat-v1_9_R1'
 include ':CombatTagPlusCompat-v1_9_R2'
 include ':CombatTagPlusCompat-v1_10_R1'
 include ':CombatTagPlusCompat-v1_11_R1'
+include ':CombatTagPlusCompat-v1_12_R1'
 include ':CombatTagPlusHook'
 // include ':CombatTagPlusFactions-v1_6'
 // include ':CombatTagPlusFactions-v1_8'
@@ -28,6 +29,7 @@ project(':CombatTagPlusCompat-v1_9_R1').projectDir = "$rootDir/CombatTagPlusComp
 project(':CombatTagPlusCompat-v1_9_R2').projectDir = "$rootDir/CombatTagPlusCompat-v1_9_R2" as File
 project(':CombatTagPlusCompat-v1_10_R1').projectDir = "$rootDir/CombatTagPlusCompat-v1_10_R1" as File
 project(':CombatTagPlusCompat-v1_11_R1').projectDir = "$rootDir/CombatTagPlusCompat-v1_11_R1" as File
+project(':CombatTagPlusCompat-v1_12_R1').projectDir = "$rootDir/CombatTagPlusCompat-v1_12_R1" as File
 project(':CombatTagPlusHook').projectDir = "$rootDir/CombatTagPlusHook" as File
 // project(':CombatTagPlusFactions-v1_6').projectDir = "$rootDir/CombatTagPlusFactions-v1_6" as File
 // project(':CombatTagPlusFactions-v1_8').projectDir = "$rootDir/CombatTagPlusFactions-v1_8" as File
